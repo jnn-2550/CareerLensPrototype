@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CareerLens</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="careerlens.css">
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <div class="brand">Career<span>Lens</span></div>
+    <div class="tabs" role="tablist" aria-label="Sections">
+      <button class="tab-btn active" data-view="home">Home</button>
+      <button class="tab-btn" data-view="profile">Build Profile</button>
+      <button class="tab-btn" data-view="gaps">Skill Gaps</button>
+      <button class="tab-btn" data-view="matches">Career Matches</button>
+    </div>
+  </div>
+</nav>
+
+<section class="view active" id="home">
+  <div class="wrap">
+    <div class="hero">
+      <h1>See the gap between your degree and your first job — before it costs you a year.</h1>
+      <p>CareerLens compares your skills against what Kenyan employers are hiring for right now, and tells you exactly what to learn next.</p>
+      <button class="cta" onclick="showView('profile')">Build my profile</button>
+    </div>
+    <div class="stat-row">
+      <div class="stat"><b>11.6</b><span>months to first job, national average</span></div>
+      <div class="stat"><b>91%</b><span>of employers report skill deficits in new hires</span></div>
+      <div class="stat"><b>78,600</b><span>formal-sector roles for 800,000+ new job seekers</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="view" id="profile">
+  <div class="wrap">
+    <h2 class="section-title">Build your profile</h2>
+    <p class="subtitle">This powers your skill-gap analysis and career matches — it takes about two minutes.</p>
+    <div class="form-grid">
+      <div class="field"><label for="name">Full name</label><input id="name" type="text" placeholder="e.g. James Ngare"></div>
+      <div class="field"><label for="programme">Programme</label>
+        <select id="programme">
+          <option>BSc Software Engineering</option>
+          <option>BCom Finance</option>
+          <option>BSc Information Technology</option>
+          <option>BA Communication</option>
+        </select>
+      </div>
+      <div class="field full"><label>Skills you already have</label>
+        <div class="chip-select" id="skillChips">
+          <span class="chip">Python</span>
+          <span class="chip">Excel</span>
+          <span class="chip">SQL</span>
+          <span class="chip">Public Speaking</span>
+          <span class="chip">Figma</span>
+          <span class="chip">Git</span>
+          <span class="chip">Data Analysis</span>
+          <span class="chip">Cloud Basics</span>
+        </div>
+      </div>
+      <div class="field full">
+        <label for="goal">Target career</label>
+        <select id="goal">
+          <option>Software Developer</option>
+          <option>Data Analyst</option>
+          <option>Digital Marketer</option>
+        </select>
+      </div>
+      <div class="field full">
+        <button class="cta" onclick="showView('gaps')">See my skill gaps</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="view" id="gaps">
+  <div class="wrap">
+    <h2 class="section-title">Skill gap analysis — Software Developer</h2>
+    <p class="subtitle">Matched against 340 recent job listings scraped from local job boards.</p>
+    <div class="legend">
+      <span><i class="dot" style="background:var(--teal)"></i>You have this</span>
+      <span><i class="dot" style="background:var(--clay)"></i>Gap to close</span>
+    </div>
+    <div id="gapList"></div>
+  </div>
+</section>
+
+<section class="view" id="matches">
+  <div class="wrap">
+    <h2 class="section-title">Career matches for you</h2>
+    <p class="subtitle">Ranked by how closely your current skill set fits real, currently-open roles.</p>
+    <div class="job-list" id="jobList"></div>
+  </div>
+</section>
+<script src="careerlens.js"></script>  
+</body>
+</html>
