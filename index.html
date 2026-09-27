@@ -6,97 +6,292 @@
 <title>CareerLens</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="careerlens.css">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="careerLens.css">
 </head>
 <body>
-<nav>
-  <div class="wrap">
-    <div class="brand">Career<span>Lens</span></div>
-    <div class="tabs" role="tablist" aria-label="Sections">
-      <button class="tab-btn active" data-view="home">Home</button>
-      <button class="tab-btn" data-view="profile">Build Profile</button>
-      <button class="tab-btn" data-view="gaps">Skill Gaps</button>
-      <button class="tab-btn" data-view="matches">Career Matches</button>
-    </div>
-  </div>
-</nav>
 
-<section class="view active" id="home">
-  <div class="wrap">
-    <div class="hero">
-      <h1>See the gap between your degree and your first job — before it costs you a year.</h1>
-      <p>CareerLens compares your skills against what Kenyan employers are hiring for right now, and tells you exactly what to learn next.</p>
-      <button class="cta" onclick="showView('profile')">Build my profile</button>
-    </div>
-    <div class="stat-row">
-      <div class="stat"><b>11.6</b><span>months to first job, national average</span></div>
-      <div class="stat"><b>91%</b><span>of employers report skill deficits in new hires</span></div>
-      <div class="stat"><b>78,600</b><span>formal-sector roles for 800,000+ new job seekers</span></div>
-    </div>
+<nav><div class="row">
+  <div class="brand">Career<span>Lens</span></div>
+  <div class="tabs" id="tabs"></div>
+</div></nav>
+
+<section class="view active" id="home"><div class="wrap">
+  <div class="hero">
+    <h1>See the gap between your degree and your first job.</h1>
+    <p>CareerLens compares your skills against what Kenyan employers are hiring for right now, and tells you exactly what to learn next.</p>
+    <button class="btn btn-primary" id="homeCta">Create your free account</button>
   </div>
+  <div class="stat-row">
+    <div class="stat"><b>11.6</b>
+      <span>months to first job, national average</span>
+    </div>
+    <div class="stat"><b>91%</b>
+      <span>employers report skill deficits in new hires</span>
+    </div>
+    <div class="stat"><b>78,600</b>
+      <span>formal roles for 800,000+ new job seekers</span>
+      <div>
+  </div>
+</div>
 </section>
 
+<section class="view" id="register">
+  <div class="wrap" style="max-width:420px">
+  <h2>Create your account</h2>
+  <p class="muted" style="margin-bottom:20px">Takes less than a minute.</p>
+  <form id="registerForm" class="card">
+    <div class="field">
+      <label>Full name</label>
+      <input id="regName" required>
+    </div>
+    <div class="field">
+      <label>Email</label>
+      <input id="regEmail" type="email" required>
+    </div>
+    <div class="field">
+      <label>Password</label>
+      <input id="regPassword" type="password" required>
+    </div>
+    <div class="field">
+      <label>Confirm password</label>
+      <input id="regConfirm" type="password" required>
+    </div>
+    <div id="regError" class="error-text">
+
+    </div>
+    <button type="submit" class="btn btn-primary" style="width:100%">Sign up</button>
+  </form>
+</div>
+</section>
+
+<section class="view" id="login">
+  <div class="wrap" style="max-width:420px">
+  <h2>Welcome back</h2>
+  <p class="muted" style="margin-bottom:20px">Log in to continue your path.</p>
+  <form id="loginForm" class="card">
+    <div class="field">
+      <label>Email</label>
+      <input id="loginEmail" type="email" required>
+    </div>
+    <div class="field">
+      <label>Password</label><input id="loginPassword" type="password" required></div>
+    <div id="loginError" class="error-text">
+    </div>
+    <button type="submit" class="btn btn-primary" style="width:100%">Log in</button>
+  </form>
+</div>
+</section>
+
+<!-- PATH CHOOSER -->
+<section class="view" id="path">
+  <div class="wrap">
+  <h2 style="margin-bottom:4px">Choose your path</h2>
+  <p class="muted" style="margin-bottom:22px">You can switch paths anytime from the "Change path" link in the nav.</p>
+  <div class="path-grid">
+    <button class="path-card" id="pickKcse">
+      <h3>🎓 High School Graduate</h3>
+      <p class="muted">Just finished KCSE? Enter your grade and interests to see which degree pathways are in demand right now.</p>
+    </button>
+    <button class="path-card" id="pickUniversity">
+      <h3>🎒 University Student</h3>
+      <p class="muted">Pick your course and a target job role to see your skill gaps against real job postings.</p>
+    </button>
+    <button class="path-card" id="pickLecturer">
+      <h3>🏫 Admin</h3>
+      <p class="muted">Review how your department's curriculum lines up against current hiring trends.</p>
+    </button>
+  </div>
+</div>
+</section>
+
+<!-- KCSE PATHWAY -->
+<section class="view" id="kcse">
+  <div class="wrap">
+  <button class="change-path" data-view="path">← Change path</button>
+  <h2 style="margin:10px 0 4px">Find your degree pathway</h2>
+  <p class="muted" style="margin-bottom:20px">Tell us your KCSE mean grade and what you enjoy — we'll match it against current tech-sector hiring demand.</p>
+
+  <form id="kcseForm" class="card">
+    <div class="field">
+      <label>KCSE mean grade</label>
+      <select id="kcseGrade">
+        <option>A</option>
+        <option>A-</option>
+        <option>B+</option>
+        <option>B</option>
+        <option>B-</option>
+        <option>C+</option>
+        <option>C</option>
+        <option>C-</option>
+        <option>D+</option>
+        <option>D</option>
+        <option>D-</option>
+        <option>E</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>What do you enjoy? (career interest)</label>
+      <select id="kcseInterest"></select>
+    </div>
+    <button type="submit" class="btn btn-primary">See my pathway</button>
+  </form>
+
+  <div id="kcseResult"></div>
+</div>
+</section>
+
+<!-- UNIVERSITY: PROFILE -->
 <section class="view" id="profile">
   <div class="wrap">
-    <h2 class="section-title">Build your profile</h2>
-    <p class="subtitle">This powers your skill-gap analysis and career matches — it takes about two minutes.</p>
-    <div class="form-grid">
-      <div class="field"><label for="name">Full name</label><input id="name" type="text" placeholder="e.g. James Ngare"></div>
-      <div class="field"><label for="programme">Programme</label>
-        <select id="programme">
-          <option>BSc Software Engineering</option>
-          <option>BCom Finance</option>
-          <option>BSc Information Technology</option>
-          <option>BA Communication</option>
-        </select>
-      </div>
-      <div class="field full"><label>Skills you already have</label>
-        <div class="chip-select" id="skillChips">
-          <span class="chip">Python</span>
-          <span class="chip">Excel</span>
-          <span class="chip">SQL</span>
-          <span class="chip">Public Speaking</span>
-          <span class="chip">Figma</span>
-          <span class="chip">Git</span>
-          <span class="chip">Data Analysis</span>
-          <span class="chip">Cloud Basics</span>
-        </div>
-      </div>
-      <div class="field full">
-        <label for="goal">Target career</label>
-        <select id="goal">
-          <option>Software Developer</option>
-          <option>Data Analyst</option>
-          <option>Digital Marketer</option>
-        </select>
-      </div>
-      <div class="field full">
-        <button class="cta" onclick="showView('gaps')">See my skill gaps</button>
-      </div>
-    </div>
-  </div>
-</section>
+  <button class="change-path" data-view="path">← Change path</button>
+  <h2 style="margin:10px 0 4px">Your profile</h2>
+  <p class="muted" style="margin-bottom:24px">Pick your course and target job role, then add any skills you already have.</p>
 
+  <div class="card">
+    <h3 style="font-size:1.05rem; margin-bottom:14px">Course & target job role</h3>
+    <div class="field">
+      <label>Course</label>
+      <select id="programmeSelect">
+      </select>
+    </div>
+    <div class="field">
+      <label>Target job role</label>
+      <select id="careerGoalSelect">
+
+      </select>
+    </div>
+    <button class="btn btn-primary" id="saveBasics">Save</button>
+  </div>
+
+  <div class="card">
+    <h3 style="font-size:1.05rem; margin-bottom:14px">Skills beyond your coursework</h3>
+    <p class="muted" style="margin-bottom:12px">Your course syllabus is checked automatically. Add anything extra you've picked up on your own (internships, online courses, personal projects).</p>
+    <div id="skillChips" style="margin-bottom:14px">
+
+    </div>
+    <form id="skillForm" class="btn-row">
+      <div class="field" style="flex:1; min-width:150px; margin-bottom:0">
+        <label>Add a skill</label>
+        <input id="skillName" placeholder="e.g. Python">
+      </div>
+      <div class="field" style="margin-bottom:0">
+        <label>Level</label>
+        <select id="skillLevel">
+          <option>Beginner</option>
+          <option>Intermediate</option>
+          <option>Advanced</option></select>
+      </div>
+      <button type="submit" class="btn btn-outline">Add skill</button>
+    </form>
+  </div>
+
+  <div class="card">
+    <h3 style="font-size:1.05rem; margin-bottom:14px">Academic qualifications</h3>
+    <div id="qualList" style="margin-bottom:14px">
+
+    </div>
+    <form id="qualForm">
+      <div class="field">
+        <label>Qualification</label>
+        <input id="qualDegree" placeholder="e.g. BSc Software Engineering">
+      </div>
+      <div class="field">
+        <label>Institution</label>
+        <input id="qualInstitution" placeholder="e.g. Kisii University">
+      </div>
+      <div class="field">
+        <label>Year completed</label>
+        <input id="qualYear" placeholder="e.g. 2026">
+      </div>
+      <div class="field">
+        <label>Grade (optional)</label>
+        <input id="qualGrade" placeholder="e.g. Second Class Upper">
+      </div>
+      <button type="submit" class="btn btn-outline">Add qualification</button>
+    </form>
+  </div>
+
+  <button class="btn btn-primary" id="goToGaps">See my skill-gap report</button>
+</div></section>
+
+<!-- UNIVERSITY: SKILL GAPS -->
 <section class="view" id="gaps">
   <div class="wrap">
-    <h2 class="section-title">Skill gap analysis — Software Developer</h2>
-    <p class="subtitle">Matched against 340 recent job listings scraped from local job boards.</p>
-    <div class="legend">
-      <span><i class="dot" style="background:var(--teal)"></i>You have this</span>
-      <span><i class="dot" style="background:var(--clay)"></i>Gap to close</span>
+  <button class="change-path" data-view="path">← Change path</button>
+  <div class="btn-row" style="justify-content:space-between; margin:10px 0 18px">
+    <div>
+      <h2 style="margin-bottom:4px">Skill-gap report</h2><p class="muted">Your course's syllabus vs. real job posts for this role.</p>
     </div>
-    <div id="gapList"></div>
+    <div class="field" style="margin-bottom:0">
+      <label>Target job role</label>
+      <select id="gapsCareerSelect"></select>
+    </div>
   </div>
+  <div class="card overall">
+    <span class="muted">Overall match</span>
+    <b id="overallPct">0%</b>
+  </div>
+  <div class="legend">
+    <span><i class="dot" style="background:var(--teal)"></i>Covered by your course / your own skills</span>
+    <span><i class="dot" style="background:var(--clay)"></i>Gap — not currently covered</span>
+  </div>
+  <div class="card" id="gapList">
+
+  </div>
+  <div class="card" id="unitAdvice">
+
+  </div>
+  <button class="btn btn-primary" id="seeRecommendations">See recommended resources</button>
+</div></section>
+
+<!-- UNIVERSITY: RECOMMENDATIONS -->
+<section class="view" id="recommendations">
+  <div class="wrap">
+  <button class="change-path" data-view="path">← Change path</button>
+  <div class="btn-row" style="justify-content:space-between; margin:10px 0 22px">
+    <div>
+      <h2 style="margin-bottom:4px">Recommended resources</h2>
+      <p class="muted">Based on your current skill gaps.</p>
+    </div>
+    <div class="field" style="margin-bottom:0">
+      <label>Target job role</label>
+      <select id="recCareerSelect">
+
+      </select>
+    </div>
+  </div>
+  <div id="recList">
+
+  </div>
+</div>
 </section>
 
-<section class="view" id="matches">
+<!-- LECTURER / ADMIN -->
+<section class="view" id="lecturer">
   <div class="wrap">
-    <h2 class="section-title">Career matches for you</h2>
-    <p class="subtitle">Ranked by how closely your current skill set fits real, currently-open roles.</p>
-    <div class="job-list" id="jobList"></div>
-  </div>
-</section>
-<script src="careerlens.js"></script>  
+  <button class="change-path" data-view="path">← Change path</button>
+  <h2 style="margin:10px 0 4px">Curriculum vs. hiring-trend insights</h2>
+  <p class="muted" style="margin-bottom:20px">Upload or paste your unit list, then compare it against aggregated job-market demand.</p>
+
+  <form id="lecturerForm" class="card">
+    <div class="field">
+      <label>Department</label>
+      <select id="deptSelect">
+        <option>Computing Department</option>
+        <option>Business Department</option>
+        <option>Communication Department</option></select>
+    </div>
+    <div class="field">
+      <label>Paste your unit list (one per line, optional for this demo)</label>
+      <textarea id="curriculumText" placeholder="e.g. SOEN 370 - Advanced Software Design&#10;SOEN 210 - Databases"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Analyze against job market</button>
+  </form>
+
+  <div id="lecturerResult"></div>
+</div></section>
+
+<script src="careerLens.js"></script>
 </body>
 </html>
